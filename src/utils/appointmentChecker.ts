@@ -10,6 +10,9 @@ import { extractCity } from "./cityExtractor";
  * Yeni randevuları kontrol eder ve uygun olanları Telegram'a gönderir
  */
 export async function checkAppointments(): Promise<void> {
+	const now = new Date().toLocaleString(); // Localized timestamp
+	console.log(`[${now}] Kontrol ediliyor...`);
+
   try {
     const appointments = await fetchAppointments();
 
