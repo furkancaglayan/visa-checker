@@ -116,30 +116,17 @@ class TelegramService {
         waitlist_closed: "🔒",
       }[appointment.status] || "❓";
 
-    return [
-      `*${statusEmoji} YENİ RANDEVU DURUMU\\\\! *
-`,
-      `🏢 *Merkez:* ${this.escapeMarkdown(
-        appointment.center.replace(/\\s*-\\s*/g, "")
-      )}`,
-      `🌍 *Ülke/Misyon:* ${this.escapeMarkdown(
-        appointment.country_code.toUpperCase().replace(/\\s*-\\s*/g, "")
-      )} \\\\-\\\*> ${this.escapeMarkdown(
-        appointment.mission_code.toUpperCase().replace(/\\s*-\\s*/g, "")
-      )}`,
-      `🛂 *Kategori:* ${this.escapeMarkdown(
-        appointment.visa_category.replace(/\\s*-\\s*/g, "")
-      )}`,
-      `📄 *Tip:* ${this.escapeMarkdown(
-        appointment.visa_type.replace(/\\s*-\\s*/g, "")
-      )}`,
-      `🚦 *Durum:* ${statusEmoji} ${this.escapeMarkdown(appointment.status)}`,
-      `🗓️ *Son Müsait Tarih:* ${formatAvailableDate(
-        appointment.last_available_date
-      )}`,
-      `\\n📊 *Takip Sayısı:* ${appointment.tracking_count}`,
-      `\\n⏰ *Son Kontrol:* ${this.escapeMarkdown(formatDate(lastChecked))}`,
-    ].join("\\n");
+   return [
+  `*${statusEmoji} YENİ RANDEVU DURUMU\\!*`, // no space after * and escape !
+  `🏢 *Merkez:* ${this.escapeMarkdown(appointment.center.replace(/\s*-\s*/g, ""))}`,
+  `🌍 *Ülke\\/Misyon:* ${this.escapeMarkdown(appointment.country_code.toUpperCase())} \\-\\> ${this.escapeMarkdown(appointment.mission_code.toUpperCase())}`,
+  `🛂 *Kategori:* ${this.escapeMarkdown(appointment.visa_category)}`,
+  `📄 *Tip:* ${this.escapeMarkdown(appointment.visa_type)}`,
+  `🚦 *Durum:* ${statusEmoji} ${this.escapeMarkdown(appointment.status)}`,
+  `🗓️ *Son Müsait Tarih:* ${this.escapeMarkdown(formatAvailableDate(appointment.last_available_date))}`,
+  `📊 *Takip Sayısı:* ${appointment.tracking_count}`,
+  `⏰ *Son Kontrol:* ${this.escapeMarkdown(formatDate(lastChecked))}`,
+].join("\n");
   }
 
   /**

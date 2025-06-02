@@ -8,7 +8,8 @@ cacheService.startCleanupInterval();
 
 // Zamanlanmış görevi başlat
 cron.schedule(config.app.checkInterval, checkAppointments);
-console.log(`Vize randevu kontrolü başlatıldı. Kontrol sıklığı: ${config.app.checkInterval}`);
+const now = new Date().toLocaleString(); // Localized timestamp
+console.log(`[${now}] Vize randevu kontrolü başlatıldı. Kontrol sıklığı: ${config.app.checkInterval}`);
 console.log(`Hedef ülke: ${config.app.targetCountry}`);
 console.log(`Hedef ülkeler: ${config.app.missionCountries.join(', ')}`);
 if (config.app.targetCities.length > 0) {
