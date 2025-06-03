@@ -3,11 +3,18 @@ import { config } from './config/environment';
 import { cacheService } from './services/cache';
 import { checkAppointments } from './utils/appointmentChecker';
 
+import express, { Request, Response } from 'express';
+
 const app = express();
 const port = process.env.PORT || 4000;
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => { // Add : Request and : Response
   res.send('Visa Bot Task Runner Active and Healthy!');
+});
+
+// If you have other routes, apply the same fix:
+app.get('/health', (req: Request, res: Response) => { // Add : Request and : Response
+  res.status(200).json({ status: 'ok', message: 'Visa checker is running its tasks.' });
 });
 
 // Önbellek temizleme işlemini başlat
