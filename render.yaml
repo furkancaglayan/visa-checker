@@ -3,38 +3,5 @@ services:
     name: visa-checker-worker
     plan: free
     runtime: node
-    envVars:  
-    - key: TELEGRAM_BOT_TOKEN
-      value: "7973551481:AAFmns19kHYj1Vl0WP1-zo9eE2tM5-K4Ycs"
-    - key: TELEGRAM_CHAT_ID
-      value: "-1002580182922"
-    - key: TELEGRAM_RATE_LIMIT
-      value: "10"
-    - key: TELEGRAM_RETRY_AFTER
-      value: "5000"
-    - key: TELEGRAM_RATE_LIMIT_MINUTES
-      value: "20"
-    - key: CHECK_INTERVAL
-      value: "*/5 * * * *"
-    - key: TARGET_COUNTRY
-      value: "tur"
-    - key: VISA_API_URL
-      value: "https://api.visasbot.com/api/visa/list"
-    - key: MAX_CACHE_SIZE
-      value: "1000"
-    - key: CACHE_CLEANUP_INTERVAL
-      value: "86400000"
-    - key: MAX_RETRIES
-      value: "3"
-    - key: RETRY_DELAY_BASE
-      value: "1000"
-    - key: CITIES
-      value: "Ankara"
-    - key: MISSION_COUNTRY
-      value: "nld, bel, cze, fin, irl, nor, swe, ita, prt, aut, esp, hun"
-    - key: DEBUG
-      value: "false"
-    - key: VISA_SUBCATEGORIES
-      value: "Tourism"
     buildCommand: npm install && npm run build
     startCommand: npm start
