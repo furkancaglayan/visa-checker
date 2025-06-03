@@ -3,6 +3,13 @@ import { config } from './config/environment';
 import { cacheService } from './services/cache';
 import { checkAppointments } from './utils/appointmentChecker';
 
+const app = express();
+const port = process.env.PORT || 4000;
+
+app.get('/', (req, res) => {
+  res.send('Visa Bot Task Runner Active and Healthy!');
+});
+
 // Önbellek temizleme işlemini başlat
 cacheService.startCleanupInterval();
 
