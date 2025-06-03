@@ -3,5 +3,5 @@ services:
     name: visa-checker-worker
     plan: free
     runtime: node
-    buildCommand: npm install && npm run build
+    buildCommand: npm install express && npm install && npm run build
     startCommand: npm start
