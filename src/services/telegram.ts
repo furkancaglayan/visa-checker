@@ -167,6 +167,41 @@ class TelegramService {
     }
   }
 
+  async sendNotificationStr(message: string, useMarkdownV2: boolean = true): Promise<boolean> {
+    try {
+      await this.handleRateLimit();
+
+      await this.bot.telegram.sendMessage(
+        config.telegram.channelId,
+        message, // Use the pre-formatted message string
+        {
+          parse_mode: useMarkdownV2 ? "MarkdownV2" : undefined, // Conditionally set parse_mode
+          link_preview_options: {
+            is_disabled: true,
+          },
+        }
+      );
+
+      this.messageCount++;
+      return true;
+    } catch (error) {
+      if (this.isTelegramError(error)) {
+        const retryAfter = error.response?.parameters?.retry_after;
+        if (retryAfter) {
+          const waitTime = retryAfter * 1000;
+          console.log(
+            `Telegram rate limit aşıldı. ${retryAfter} saniye bekleniyor...`
+          );
+          await new Promise((resolve) => setTimeout(resolve, waitTime));
+          // Retry with the same message and markdown option
+          return this.sendNotificationStr(message, useMarkdownV2);
+        }
+      }
+      console.error("Telegram mesajı gönderilirken hata oluştu:", error);
+      return false;
+    }
+  }
+
   /**
    * Hata nesnesinin Telegram hatası olup olmadığını kontrol eder
    */
