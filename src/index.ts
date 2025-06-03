@@ -17,6 +17,10 @@ app.get('/health', (req: Request, res: Response) => { // Add : Request and : Res
   res.status(200).json({ status: 'ok', message: 'Visa checker is running its tasks.' });
 });
 
+app.listen(port, () => {
+  console.log(`Visa Bot Task Runner Active and Healthy at port ${port}`)
+})
+
 // Önbellek temizleme işlemini başlat
 cacheService.startCleanupInterval();
 
