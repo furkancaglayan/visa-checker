@@ -22,7 +22,7 @@ app.listen(port, () => {
  // Keep-Alive Cron Job (every 10 minutes) - This is the existing pinging mechanism
 const keepAlivePingCron = '*/10 * * * *'; // Every 10 minutes
 cron.schedule(keepAlivePingCron, keepAlive);
-console.log(`Keep-alive ping job scheduled with cron: ${keepAlivePingCron} to ${`http://localhost:${port}/health`}`);
+console.log(`Keep-alive taskı başlatıldı: ${keepAlivePingCron} to ${`http://localhost:${port}/health`}`);
 })
 
 sendDailyNotification();
@@ -32,9 +32,10 @@ cacheService.startCleanupInterval();
 // Zamanlanmış görevi başlat
 cron.schedule(config.app.checkInterval, checkAppointments);
 
-const dailyNotificationCron = '0 9 * * *'; // Example: 9:00 AM daily
-
-cron.schedule(dailyNotificationCron, sendDailyNotification);
+const dailyNotificationCronMorning = '0 9 * * *'; // Example: 9:00 AM daily
+const dailyNotificationCronEvening = '0 21 * * *'; // Example: 9:00 AM daily
+cron.schedule(dailyNotificationCronMorning, sendDailyNotification);
+cron.schedule(dailyNotificationCronEvening, sendDailyNotification);
 
 console.log(`Vize randevu kontrolü başlatıldı. Kontrol sıklığı: ${config.app.checkInterval}`);
 console.log(`Hedef ülke: ${config.app.targetCountry}`);
@@ -48,16 +49,16 @@ void checkAppointments();
 async function sendDailyNotification() 
 {
  // Inside your app.listen callback in index.ts, after the server starts:
-const startupMessage = "Visa check çalışıyor 🤖";
+const startupMessage = "Vize kontrol botu çalışmaya devam ediyor 🤖";
 telegramService.sendNotificationStr(startupMessage, false) // Send as plain text
-  .then(() => console.log("Startup notification sent."))
+  .then(() => console.log("Telegram başlangıç bildirimi gönderildi."))
   .catch(error => console.error("Failed to send startup notification:", error));
 }
 
 async function keepAlive(){
   const now = new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' });
   const healthCheckUrl = `http://localhost:${port}/health`; // Pings your app's /health endpoint
-  console.log(`[${now}] Sending keep-alive ping to ${healthCheckUrl}`);
+  console.log(`[${now}] Keep alive pingi gönderiliyor ${healthCheckUrl}`);
 
   const req = http.get(healthCheckUrl, (res) => { // Sends an HTTP GET request
     // ... (handles response)
