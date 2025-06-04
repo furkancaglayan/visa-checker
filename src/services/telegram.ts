@@ -165,11 +165,8 @@ class TelegramService {
       console.error("Telegram mesajı gönderilirken hata oluştu:", error);
       console.error(this.formatMessage(appointment));
 
-      if (error instanceof Error) {
-  this.sendNotificationStr(error.stack || error.toString(), true);
-} else {
-  this.sendNotificationStr(String(error), true); // fallback for non-Error types
-}
+      this.sendNotificationStr("Telegram mesajı gönderilirken hata oluştu", true);
+
       return false;
     }
   }
