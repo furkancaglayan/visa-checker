@@ -120,7 +120,7 @@ class TelegramService {
   `*${statusEmoji} YENİ RANDEVU DURUMU\\!*`, // no space after * and escape !
   `🏢 *Merkez:* ${this.escapeMarkdown(appointment.center.replace(/\s*-\s*/g, ""))}`,
   `🌍 *Ülke\\/Misyon:* ${this.escapeMarkdown(appointment.country_code.toUpperCase())} \\-\\> ${this.escapeMarkdown(appointment.mission_code.toUpperCase())}`,
-  `🛂 *Kategori:* ${this.escapeMarkdown(appointment.visa_category)}`,
+  //`🛂 *Kategori:* ${this.escapeMarkdown(appointment.visa_category)}`,
   `📄 *Tip:* ${this.escapeMarkdown(appointment.visa_type)}`,
   `🚦 *Durum:* ${statusEmoji} ${this.escapeMarkdown(appointment.status)}`,
   `🗓️ *Son Müsait Tarih:* ${this.escapeMarkdown(formatAvailableDate(appointment.last_available_date))}`,
