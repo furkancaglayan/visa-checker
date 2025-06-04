@@ -163,6 +163,11 @@ class TelegramService {
         }
       }
       console.error("Telegram mesajı gönderilirken hata oluştu:", error);
+    if (error instanceof Error) {
+  this.sendNotificationStr(error.stack || error.toString(), true);
+} else {
+  this.sendNotificationStr(String(error), true); // fallback for non-Error types
+}
       return false;
     }
   }
