@@ -29,7 +29,7 @@ class TelegramService {
   }
 
   private escapeMarkdown(text: string): string {
-    return text.replace(/[_*[\\]()~`>#+=|{}.!]/g, "\\\\$&");
+   return text.replace(/[_*[\\]()~`>#+=|{}.!-]/g, '\\$&');
   }
 
   /**
@@ -178,7 +178,7 @@ class TelegramService {
 
       await this.bot.telegram.sendMessage(
         config.telegram.channelId,
-        message, // Use the pre-formatted message string
+        this.escapeMarkdown(message), // Use the pre-formatted message string
         {
           parse_mode: useMarkdownV2 ? "MarkdownV2" : undefined, // Conditionally set parse_mode
           link_preview_options: {
