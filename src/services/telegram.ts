@@ -28,8 +28,8 @@ class TelegramService {
     this.startRateLimitReset();
   }
 
-  private escapeMarkdown(text: string): string {
-   return text.replace(/[_*[\\]()~`>#+=|{}.!-]/g, '\\$&');
+  public escapeMarkdown(text: string): string {
+    return text.replace(/[_*[\]()~`>#+=|{}.!\\/-]/g, '\\$&');
   }
 
   /**

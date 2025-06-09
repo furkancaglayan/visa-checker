@@ -11,8 +11,6 @@ import { extractCity } from "./cityExtractor";
  */
 export async function checkAppointments(): Promise<void> {
 	const now = new Date().toLocaleString(); // Localized timestamp
-	console.log(`[${now}] Kontrol ediliyor...`);
-
   try {
     const appointments = await fetchAppointments();
 
